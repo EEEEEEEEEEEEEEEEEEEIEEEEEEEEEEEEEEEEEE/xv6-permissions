@@ -25,7 +25,7 @@ exec(char *path, char **argv)
   }
   ilock(ip);
   pgdir = 0;
-
+  if(check_permissions(ip) == -1) goto access_error;
   // Check ELF header
   if(readi(ip, (char*)&elf, 0, sizeof(elf)) < sizeof(elf))
     goto bad;
@@ -95,6 +95,9 @@ exec(char *path, char **argv)
   switchuvm(proc);
   freevm(oldpgdir);
   return 0;
+
+ access_error:
+ cprintf("you do not have permission to execute this application\n");
 
  bad:
   if(pgdir)

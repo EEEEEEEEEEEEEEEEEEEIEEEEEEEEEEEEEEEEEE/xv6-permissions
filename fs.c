@@ -657,3 +657,9 @@ nameiparent(char *path, char *name)
 {
   return namex(path, 1, name);
 }
+
+int check_permissions(struct inode * ip) {
+    cprintf("%x\n", ip->mode);
+    if((ip->mode & 0x00F) != 0x007) return -1;
+    return 0; 
+}

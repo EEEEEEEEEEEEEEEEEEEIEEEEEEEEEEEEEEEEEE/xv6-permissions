@@ -230,7 +230,7 @@ ialloc(ushort type)
   // Set notable defaults for our permission attributes.
   din.ownerid = xshort(99);
   din.groupid = xshort(1);
-  din.mode = xint(0x00000700);
+  din.mode = xint(0x777);
 
   winode(inum, &din);
   return inum;
