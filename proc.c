@@ -98,7 +98,7 @@ userinit(void)
 
     safestrcpy(p->name, "initcode", sizeof(p->name));
     p->cwd = namei("/");
-
+    p->uid = 1;
     p->state = RUNNABLE;
 }
 
@@ -144,6 +144,7 @@ fork(void)
     }
     np->sz = proc->sz;
     np->parent = proc;
+    np->uid = proc->uid;
     *np->tf = *proc->tf;
 
     // Clear %eax so that fork returns 0 in the child.
